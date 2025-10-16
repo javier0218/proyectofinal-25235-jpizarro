@@ -2,22 +2,27 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './paginas/Login';
+import Infaltables from './paginas/Infaltables';
 import Perfil from './paginas/Perfil';
-import Productos from './paginas/Productos';
 import Administracion from './paginas/Administracion';
 import NoEncontrado from './paginas/NoEncontrado';
 import RutaProtegida from './components/RutaProtegida';
-import Inicio from './paginas/inicio';
+import Home from './paginas/Home';
+import Ofertas from './paginas/Ofertas';
+import ProductList from './paginas/ProductList';
+
 
 function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header/>
       <Routes>
-        <Route path="/" element={<Inicio />} />
+        <Route path="/" element={<Home />} />     
         <Route path="/login" element={<Login />} />
-        <Route path="/productos" element={<Productos />} />
+        <Route path="/ofertas" element={<Ofertas/>} />
+        <Route path="/infaltables" element={<Infaltables/>} />
+        <Route path="/productos" element={<ProductList/>} />       
         <Route path="/perfil/:id" element={
           <RutaProtegida><Perfil /></RutaProtegida>
         } />
@@ -31,4 +36,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
