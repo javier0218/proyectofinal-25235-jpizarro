@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Navbar “glass” que oscurece al hover */
+.navbar-glass {
+  background-color: rgba(17, 24, 39, 0) !important; /* transparente */
+  transition: background-color .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
+  backdrop-filter: none;
+}
+.navbar-glass:hover {
+  background-color: rgba(17, 24, 39, 0.85) !important; /* oscuro */
+  box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  backdrop-filter: saturate(160%) blur(8px);
+}

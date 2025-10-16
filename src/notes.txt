@@ -1,0 +1,10 @@
+-bootstrap
+npm install bootstrap react-bootstrap
+
+npm install react-router-dom
+
+$ npm i --save @fortawesome/fontawesome
+$ npm i --save @fortawesome/react-fontawesome
+$ npm i --save @fortawesome/fontawesome-free-solid
+$ npm i --save @fortawesome/fontawesome-free-regular
+$ npm i --save @fortawesome/fontawesome-svg-core
