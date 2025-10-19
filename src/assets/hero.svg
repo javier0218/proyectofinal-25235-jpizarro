@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#ff7eb3"/>
+      <stop offset="1" stop-color="#65d6ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#g)"/>
+  <g fill="#fff" font-family="Arial, Helvetica, sans-serif">
+    <text x="50" y="120" font-size="44" font-weight="700">LaCastiClothes</text>
+    <text x="50" y="170" font-size="20" opacity="0.95">Ropa de segunda mano con estilo y calidad superior</text>
+  </g>
+  <g transform="translate(520,60)" opacity="0.95">
+    <rect x="0" y="0" width="240" height="280" rx="12" fill="#fff" opacity="0.08"/>
+    <path d="M20 200 Q80 60 200 180" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Container, ListGroup } from 'react-bootstrap';
 import ProductCard from './ProductCard';
+import { useCartDispatch } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 
 
 const ProductList = ({ category = null }) => {
@@ -26,8 +28,11 @@ const ProductList = ({ category = null }) => {
     }, [category]);
 
 
+    const dispatch = useCartDispatch();
+    const { showToast } = useToast();
     const handleAgregarAlCarrito = (product) => {
-        alert(`Producto ${product.title} agregado al carrito`);
+        dispatch({ type: 'ADD_ITEM', payload: product });
+        showToast?.(`Producto "${product.title}" agregado al carrito`);
     }
 
     if (loading) {

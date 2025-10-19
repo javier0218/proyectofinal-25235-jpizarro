@@ -10,6 +10,7 @@ import RutaProtegida from './components/RutaProtegida';
 import Home from './paginas/Home';
 import Ofertas from './paginas/Ofertas';
 import ProductList from './paginas/ProductList';
+import Carrito from './paginas/Carrito';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/ofertas" element={<Ofertas/>} />
         <Route path="/infaltables" element={<Infaltables/>} />
         <Route path="/productos" element={<ProductList/>} />       
+  <Route path="/carrito" element={<Carrito/>} />
         <Route path="/perfil/:id" element={
           <RutaProtegida><Perfil /></RutaProtegida>
         } />

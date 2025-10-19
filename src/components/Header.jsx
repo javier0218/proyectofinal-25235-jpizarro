@@ -15,7 +15,7 @@ export default function Header() {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className='navbar-glass'>
+    <Navbar bg="primary" variant="dark" expand="lg" className='navbar-glass'>
       <Container>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <span className="me-2 d-inline-flex align-items-center">
