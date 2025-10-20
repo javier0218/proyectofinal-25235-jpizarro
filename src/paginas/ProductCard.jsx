@@ -25,7 +25,7 @@ const ProductCard = ({ product, agregarAlCarrito }) => {
             <Card.Body className="d-flex flex-column">
                 <Card.Title style={{ fontSize: '1rem' }}>{product.title}</Card.Title>
                 <Card.Text style={{ fontSize: '0.9rem', flexGrow: 1 }}>{product.description}</Card.Text>
-                <Card.Text className="mt-auto">${product.price}</Card.Text>
+                <Card.Text className="mt-auto"><strong>${product.price}</strong></Card.Text>
                 <Button variant="primary" onClick={() => handleAdd(product)}>Agregar al carrito</Button>
             </Card.Body>
         </Card>
