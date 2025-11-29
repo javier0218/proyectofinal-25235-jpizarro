@@ -7,7 +7,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     localStorage.setItem('auth', 'true');
     navigate('/perfil/usuario123');
-    e.preventDefault();
+    e.preventDefault();    
     alert('Login exitoso');
   };
 
