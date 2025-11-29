@@ -1,0 +1,230 @@
+import React, { useState, useEffect } from 'react';
+import { Table, Button, Modal, Form } from 'react-bootstrap';
+
+const API_URL = 'https://69092b0b2d902d0651b2dfae.mockapi.io/productos';
+
+const CrudProductos = () => {
+    const [productos, setProductos] = useState([]);
+    const [show, setShow] = useState(false);
+    const [form, setForm] = useState({
+        title: "",
+        description: "",
+        price: "",
+        stock: "",
+        image: "",
+    });
+
+    const [editId, setIsEditId] = useState(null);
+
+    //fetch --> obtener los productos
+    const getProductos = () => {
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(data => setProductos(data))
+            .catch(err => console.error('Error fetching products:', err));
+    };
+
+    //Cerrar modal
+    const handleClose = () => {
+        setShow(false);
+        setForm({
+            title: "",
+            description: "",
+            price: "",
+            stock: "",
+            image: "",
+        });
+        setIsEditId(null);
+    };
+
+    //Abrir modal (acepta product opcional)
+    const handleShow = (product) => {
+        setShow(true);
+        if (product) {
+            setForm({
+                ...product, //crear un objeto en paralelo basado en el original, para no mutar el original
+                price: Number(product.price),
+                stock: Number(product.stock),
+            });
+            setIsEditId(product.id);
+        } else {
+            setForm({
+                title: "",
+                description: "",
+                price: "",
+                stock: "",
+                image: "",
+            });
+            setIsEditId(null);
+        }
+    };
+
+    //Crear o actualizar product
+    const handleSave = (e) => {
+        e.preventDefault();
+        const productData = {
+            ...form,
+            price: Number(form.price),
+            stock: Number(form.stock),
+        };
+
+        const method = editId ? 'PUT' : 'POST';
+        const url = editId ? `${API_URL}/${editId}` : API_URL;
+
+        fetch(url, {
+            method: method,
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(productData),
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return res.json();
+            })
+            .then(() => {
+                handleClose();
+                getProductos();
+            })
+            .catch((err) => console.error('Error saving product:', err));
+    }; 
+
+    //Eliminar product
+    const handleDelete = (id) => {
+        if(!window.confirm('¿Estás seguro de que deseas eliminar este product?')) return;
+        fetch(`${API_URL}/${id}`, {
+            method: 'DELETE'})
+            .then((res) => {
+                if (!res.ok) { 
+                    throw new Error('Error al eliminar el product');
+                }
+                return res.json();
+            })
+            .then(() => {
+                getProductos();
+            })
+            .catch((err) => console.error('Error deleting product:', err));
+    };
+
+    //Cargar productos al iniciar
+    useEffect(() => {
+        getProductos();
+    }, []);
+
+    return (
+        <div className="container mt-4">
+            <h2>CRUD de Productos</h2>
+            <Button variant="primary" className="mb-3" onClick={()=>handleShow()}>
+                Agregar Producto
+            </Button>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {productos.map((product) => (
+                        <tr key={product.id}>
+                           <td>{product.title}</td>
+                            <td>{product.description}</td>
+                            <td>${Number(product.price).toFixed(2)}</td>
+                            <td>{product.stock}</td>
+                            <td>
+                                {product.image?.startsWith("http") && (//check si la imagen es una URL válida
+                                    <img src={product.image} 
+                                    alt={product.title} 
+                                    style={{ width: '50px',
+                                     height: '50px', objectFit: 'contain' }} />
+                                )}
+                            </td>
+                            <td>
+                                <Button size="sm"
+                                variant="secondary"
+                                 onClick={() => handleShow(product)}>
+                                    Editar
+                                </Button>{' '}
+                                <Button size="sm" variant="danger" onClick={() => handleDelete(product.id)}>   
+                                    Eliminar
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+
+            <Modal show={show} onHide={handleClose}>
+                <Form onSubmit={handleSave}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{editId ? 'Editar Producto' : 'Agregar Producto'}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Titulo</Form.Label>
+                            <Form.Control
+                                value={form.title}
+                                onChange={(e) => setForm({ ...form, title: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Descripción</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                value={form.description}
+                                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Precio</Form.Label>
+                            <Form.Control
+                                type="number"
+                                step="0.01"
+                                value={form.price}
+                                onChange={(e) => setForm({ ...form, price: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Stock</Form.Label>
+                            <Form.Control
+                                type="number"
+                                value={form.stock}
+                                onChange={(e) => setForm({ ...form, stock: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Imagen (URL)</Form.Label>
+                            <Form.Control
+                                value={form.image}
+                                onChange={(e) => setForm({ ...form, image: e.target.value })}
+                            />
+                        </Form.Group>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Cancelar
+                        </Button>
+                        <Button variant="primary" type="submit">
+                            Guardar
+                        </Button>
+                    </Modal.Footer>
+                </Form>
+            </Modal>
+        </div>
+    );
+};
+
+export default CrudProductos;
+
+                                
+
+
+
