@@ -8,6 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
     if (user === 'admin' && pass === '1234') {
       localStorage.setItem('auth', 'true');
@@ -17,6 +18,7 @@ const Login = () => {
     } else {
       alert('Usuario o contraseña incorrectos');
     }
+
   };
 
   return (
