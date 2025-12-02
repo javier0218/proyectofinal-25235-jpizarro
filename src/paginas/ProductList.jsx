@@ -10,7 +10,7 @@ const ProductList = ({ category = null }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        let url = 'https://fakestoreapi.com/products';
+        let url = 'https://69092b0b2d902d0651b2dfae.mockapi.io/productos';
         if (category) {
             url = `https://fakestoreapi.com/products/category/${category}`;
         }

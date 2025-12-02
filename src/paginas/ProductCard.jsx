@@ -21,12 +21,12 @@ const ProductCard = ({ product, agregarAlCarrito }) => {
 
     return (
         <Card className="h-100">
-            <Card.Img variant="top" src={product.image} alt={product.title} className='card-img-top img-fluid' style={{ height: '200px', objectFit: 'contain' }} />
+            <Card.Img variant="top" src={product.image} alt={product.title} className='card-img-top img-fluid' style={{ height: 'clamp(150px, 25vw, 200px)', objectFit: 'contain' }} />
             <Card.Body className="d-flex flex-column">
-                <Card.Title style={{ fontSize: '1rem' }}>{product.title}</Card.Title>
-                <Card.Text style={{ fontSize: '0.9rem', flexGrow: 1 }}>{product.description}</Card.Text>
-                <Card.Text className="mt-auto"><strong>${product.price}</strong></Card.Text>
-                <Button variant="primary" onClick={() => handleAdd(product)}>Agregar al carrito</Button>
+                <Card.Title style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>{product.title}</Card.Title>
+                <Card.Text style={{ fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', flexGrow: 1 }}>{product.description}</Card.Text>
+                <Card.Text className="mt-auto"><strong style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)' }}>${product.price}</strong></Card.Text>
+                <Button variant="primary" onClick={() => handleAdd(product)} className="mt-2" style={{ fontSize: 'clamp(0.85rem, 2vw, 1rem)' }}>Agregar al carrito</Button>
             </Card.Body>
         </Card>
     );

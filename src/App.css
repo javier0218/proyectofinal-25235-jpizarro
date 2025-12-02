@@ -1,10 +1,59 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 100%;
 }
 
+/* Responsive para tabletas y dispositivos menores */
+@media (max-width: 768px) {
+  #root {
+    min-height: 100vh;
+  }
+  
+  main {
+    padding: 0;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Responsive para dispositivos móviles pequeños */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.2rem;
+  }
+  
+  h3 {
+    font-size: 1rem;
+  }
+  
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive para pantallas muy grandes */
+@media (min-width: 1440px) {
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -51,4 +100,72 @@
   background-color: rgba(17, 24, 39, 0.85) !important; /* oscuro */
   box-shadow: 0 8px 24px rgba(0,0,0,.18);
   backdrop-filter: saturate(160%) blur(8px);
+}
+
+/* Compact header spacing */
+.navbar-glass .navbar-brand {
+  gap: 0.4rem;
+  padding-left: 0.5rem;
+}
+.navbar-glass .nav-link {
+  padding-left: 0.4rem !important;
+  padding-right: 0.4rem !important;
+}
+.navbar-glass .navbar-toggler {
+  padding: 0.25rem 0.5rem;
+}
+
+/* Reduce horizontal container padding on smaller screens */
+@media (max-width: 992px) {
+  .container-fluid.px-2 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+}
+
+/* Ensure left links stay near brand and right group aligns right */
+.navbar-glass .navbar-brand {
+  margin-right: 0.25rem;
+}
+.navbar-glass .nav-left .nav-link {
+  padding-left: 0.35rem !important;
+  padding-right: 0.35rem !important;
+}
+.navbar-glass .nav-right {
+  margin-left: auto;
+}
+
+/* Hero: side-by-side on wider screens */
+.hero-inner {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.hero-left, .hero-right {
+  flex: 1 1 50%;
+  max-width: 550px;
+}
+
+@media (max-width: 767px) {
+  .hero-inner {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .hero-left, .hero-right { max-width: 100%; }
+}
+
+/* Responsive para Header */
+@media (max-width: 768px) {
+  .navbar-glass {
+    padding: 0.5rem 0 !important;
+  }
+}
+
+/* Flex container para body content */
+main {
+  flex: 1;
+  width: 100%;
 }

@@ -3,7 +3,7 @@ import { Table, Button, Modal, Form } from 'react-bootstrap';
 
 const API_URL = 'https://69092b0b2d902d0651b2dfae.mockapi.io/productos';
 
-const CrudProductos = () => {
+const Admin = () => {
     const [productos, setProductos] = useState([]);
     const [show, setShow] = useState(false);
     const [form, setForm] = useState({
@@ -60,7 +60,7 @@ const CrudProductos = () => {
     };
 
     //Crear o actualizar product
-    const handleSave = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const productData = {
             ...form,
@@ -111,9 +111,13 @@ const CrudProductos = () => {
         getProductos();
     }, []);
 
+
+
     return (
         <div className="container mt-4">
-            <h2>CRUD de Productos</h2>
+            <h2>Administra Los Productos</h2>
+            <p></p>
+            <p>Crea, Actualiza y Edita los productos a vender.</p>
             <Button variant="primary" className="mb-3" onClick={()=>handleShow()}>
                 Agregar Producto
             </Button>
@@ -159,7 +163,7 @@ const CrudProductos = () => {
             </Table>
 
             <Modal show={show} onHide={handleClose}>
-                <Form onSubmit={handleSave}>
+                <Form onSubmit={handleSubmit}>
                     <Modal.Header closeButton>
                         <Modal.Title>{editId ? 'Editar Producto' : 'Agregar Producto'}</Modal.Title>
                     </Modal.Header>
@@ -222,7 +226,7 @@ const CrudProductos = () => {
     );
 };
 
-export default CrudProductos;
+export default Admin;
 
                                 
 

@@ -23,25 +23,25 @@ const Carrito = () => {
 
   if (!items || items.length === 0) {
     return (
-      <Container className="mt-4">
-        <h3>Tu carrito está vacío</h3>
+      <Container className="mt-4 mb-4" style={{padding: '1rem'}}>
+        <h3 style={{fontSize: 'clamp(1.2rem, 3vw, 1.5rem)'}}>Tu carrito está vacío</h3>
       </Container>
     );
   }
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-4 mb-4" style={{padding: '1rem', maxWidth: '100%'}}>
       <Row>
-        <Col>
-          <h3>Carrito de compras</h3>
+        <Col xs={12} md={12}>
+          <h3 style={{fontSize: 'clamp(1.2rem, 3vw, 1.5rem)'}}>Carrito de compras</h3>
           <Table responsive bordered hover className="mt-3">
             <thead>
               <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
-                <th></th>
+                <th style={{fontSize: 'clamp(0.85rem, 2vw, 1rem)'}}>Producto</th>
+                <th style={{fontSize: 'clamp(0.85rem, 2vw, 1rem)'}}>Precio</th>
+                <th style={{fontSize: 'clamp(0.85rem, 2vw, 1rem)'}}>Cantidad</th>
+                <th style={{fontSize: 'clamp(0.85rem, 2vw, 1rem)'}}>Subtotal</th>
+                <th style={{fontSize: 'clamp(0.85rem, 2vw, 1rem)'}}></th>
               </tr>
             </thead>
             <tbody>
@@ -70,12 +70,12 @@ const Carrito = () => {
           </Table>
 
           <div className="d-flex justify-content-between align-items-center">
-            <div>
-              <Button variant="outline-danger" onClick={handleClear}>Vaciar carrito</Button>
+            <div style={{marginBottom: '0.5rem'}}>
+              <Button variant="outline-danger" onClick={handleClear} style={{fontSize: 'clamp(0.85rem, 2vw, 1rem)'}}>Vaciar carrito</Button>
             </div>
             <div>
-              <h5>Total: ${total.toFixed(2)}</h5>
-              <Button variant="primary">Ir a pagar</Button>
+              <h5 style={{fontSize: 'clamp(1rem, 2.5vw, 1.25rem)'}}>Total: ${total.toFixed(2)}</h5>
+              <Button variant="primary" style={{fontSize: 'clamp(0.85rem, 2vw, 1rem)'}}>Ir a pagar</Button>
             </div>
           </div>
         </Col>

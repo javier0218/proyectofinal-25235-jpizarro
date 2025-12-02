@@ -22,8 +22,8 @@ const FeaturedCarousel = ({ category = null }) => {
   }, []);
 
   useEffect(() => {
-    let url = 'https://fakestoreapi.com/products?limit=12';
-    if (category) url = `https://fakestoreapi.com/products/category/${category}`;
+    let url = 'https://69092b0b2d902d0651b2dfae.mockapi.io/productos?limit=12';
+    if (category) url = `https://69092b0b2d902d0651b2dfae.mockapi.io/productos/category/${category}`;
 
     fetch(url)
       .then(res => res.json())
