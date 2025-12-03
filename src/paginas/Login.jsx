@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Card, Alert } from 'react-bootstrap';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
+  const {login} = useAuth();
+  const navigate = useNavigate();
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
-  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
-    if (user === 'admin' && pass === '1234') {
-      localStorage.setItem('auth', 'true');
-      // Dispara evento personalizado para actualizar el Header en la misma pestaña
-      window.dispatchEvent(new Event('authChange'));
+    const success = login(user, pass);
+    if (success) {
+      setError(null);
       navigate('/admin');
     } else {
-      alert('Usuario o contraseña incorrectos');
+      setError('Credenciales incorrectas');
     }
 
   };
@@ -27,6 +29,7 @@ const Login = () => {
         <Col md={6} lg={4}>
           <Card className="shadow-lg p-4">
             <Card.Body>
+              {error && <Alert variant="danger" className="mb-3">{error}</Alert>}
               <h2 className="text-center mb-4">Iniciar Sesión</h2>
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">

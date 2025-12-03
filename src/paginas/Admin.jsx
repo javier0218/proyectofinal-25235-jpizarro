@@ -6,7 +6,7 @@ const API_URL = 'https://69092b0b2d902d0651b2dfae.mockapi.io/productos';
 const Admin = () => {
     const [productos, setProductos] = useState([]);
     const [show, setShow] = useState(false);
-    const [form, setForm] = useState({
+    const [product, setProduct] = useState({
         title: "",
         description: "",
         price: "",
@@ -27,7 +27,7 @@ const Admin = () => {
     //Cerrar modal
     const handleClose = () => {
         setShow(false);
-        setForm({
+        setProduct({
             title: "",
             description: "",
             price: "",
@@ -41,14 +41,14 @@ const Admin = () => {
     const handleShow = (product) => {
         setShow(true);
         if (product) {
-            setForm({
+            setProduct({
                 ...product, //crear un objeto en paralelo basado en el original, para no mutar el original
                 price: Number(product.price),
                 stock: Number(product.stock),
             });
             setIsEditId(product.id);
         } else {
-            setForm({
+            setProduct({
                 title: "",
                 description: "",
                 price: "",
@@ -63,9 +63,9 @@ const Admin = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const productData = {
-            ...form,
-            price: Number(form.price),
-            stock: Number(form.stock),
+            ...product,
+            price: Number(product.price),
+            stock: Number(product.stock),
         };
 
         const method = editId ? 'PUT' : 'POST';
@@ -171,8 +171,8 @@ const Admin = () => {
                         <Form.Group className="mb-3">
                             <Form.Label>Titulo</Form.Label>
                             <Form.Control
-                                value={form.title}
-                                onChange={(e) => setForm({ ...form, title: e.target.value })}
+                                value={product.title}
+                                onChange={(e) => setProduct({ ...product, title: e.target.value })}
                                 required
                             />
                         </Form.Group>
@@ -181,8 +181,8 @@ const Admin = () => {
                             <Form.Control
                                 as="textarea"
                                 rows={3}
-                                value={form.description}
-                                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                                value={product.description}
+                                onChange={(e) => setProduct({ ...product, description: e.target.value })}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
@@ -190,8 +190,8 @@ const Admin = () => {
                             <Form.Control
                                 type="number"
                                 step="0.01"
-                                value={form.price}
-                                onChange={(e) => setForm({ ...form, price: e.target.value })}
+                                value={product.price}
+                                onChange={(e) => setProduct({ ...product, price: e.target.value })}
                                 required
                             />
                         </Form.Group>
@@ -199,16 +199,16 @@ const Admin = () => {
                             <Form.Label>Stock</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={form.stock}
-                                onChange={(e) => setForm({ ...form, stock: e.target.value })}
+                                value={product.stock}
+                                onChange={(e) => setProduct({ ...product, stock: e.target.value })}
                                 required
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Imagen (URL)</Form.Label>
                             <Form.Control
-                                value={form.image}
-                                onChange={(e) => setForm({ ...form, image: e.target.value })}
+                                value={product.image}
+                                onChange={(e) => setProduct({ ...product, image: e.target.value })}
                             />
                         </Form.Group>
                     </Modal.Body>

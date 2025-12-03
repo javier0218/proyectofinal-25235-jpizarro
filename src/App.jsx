@@ -27,7 +27,7 @@ function App() {
         <Route path="/productos" element={<ProductList />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/perfil/:id" element={
-          <RutaProtegida><Perfil /></RutaProtegida>
+          <RutaProtegida><Perfil/></RutaProtegida>
         } />
         <Route path="/admin" element={
           <RutaProtegida><Admin /></RutaProtegida>
