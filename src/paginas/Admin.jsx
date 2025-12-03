@@ -33,6 +33,7 @@ const Admin = () => {
             price: "",
             stock: "",
             image: "",
+            category: "",
         });
         setIsEditId(null);
     };
@@ -54,6 +55,7 @@ const Admin = () => {
                 price: "",
                 stock: "",
                 image: "",
+                category: "",
             });
             setIsEditId(null);
         }
@@ -128,6 +130,7 @@ const Admin = () => {
                         <th>Descripción</th>
                         <th>Precio</th>
                         <th>Stock</th>
+                        <th>Categoría</th>
                         <th>Imagen</th>
                         <th>Acciones</th>
                     </tr>
@@ -139,6 +142,7 @@ const Admin = () => {
                             <td>{product.description}</td>
                             <td>${Number(product.price).toFixed(2)}</td>
                             <td>{product.stock}</td>
+                            <td>{product.category}</td>
                             <td>
                                 {product.image?.startsWith("http") && (//check si la imagen es una URL válida
                                     <img src={product.image} 
@@ -148,14 +152,18 @@ const Admin = () => {
                                 )}
                             </td>
                             <td>
-                                <Button size="sm"
-                                variant="secondary"
-                                 onClick={() => handleShow(product)}>
-                                    Editar
-                                </Button>{' '}
-                                <Button size="sm" variant="danger" onClick={() => handleDelete(product.id)}>   
-                                    Eliminar
-                                </Button>
+                                <div style={{ display: 'flex', gap: '8px' }}>
+                                    <Button size="sm"
+                                    variant="secondary"
+                                    onClick={() => handleShow(product)}
+                                    style={{ flex: 1 }}>
+                                        Editar
+                                    </Button>
+                                    <Button size="sm" variant="danger" onClick={() => handleDelete(product.id)}
+                                    style={{ flex: 1 }}>   
+                                        Eliminar
+                                    </Button>
+                                </div>
                             </td>
                         </tr>
                     ))}
@@ -201,6 +209,14 @@ const Admin = () => {
                                 type="number"
                                 value={product.stock}
                                 onChange={(e) => setProduct({ ...product, stock: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                         <Form.Group className="mb-3">
+                            <Form.Label>Category</Form.Label>
+                            <Form.Control
+                                value={product.category}
+                                onChange={(e) => setProduct({ ...product, category: e.target.value })}
                                 required
                             />
                         </Form.Group>

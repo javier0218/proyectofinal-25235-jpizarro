@@ -7,6 +7,7 @@ const FeaturedCarousel = ({ category = null }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [perPage, setPerPage] = useState(3);
+  const dispatch = useCartDispatch();
 
   // Ajustar número de items por slide según ancho de ventana
   useEffect(() => {
@@ -62,8 +63,6 @@ const FeaturedCarousel = ({ category = null }) => {
       </svg>
     </span>
   );
-
-  const dispatch = useCartDispatch();
 
   return (
     <Container>
